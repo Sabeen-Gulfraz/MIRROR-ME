@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,300;1,200&display=swap"
+          rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='images/mirror me.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing_page.css') }}">
+    <title>Mirror Me</title>
+    <script src="{{ url_for('static', filename='js/feed.js') }}"></script>
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <script>
+           (function(){
+             emailjs.init("4P2PGfOUuJRq13csl");
+           })();
+    </script>
+</head>
+<body>
+<nav>
+    <div class="nav-logo">
+        <img src="{{ url_for('static', filename='images/mirror me.png') }}" width="135px">
+    </div>
+    <div class="nav-links">
+        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-x-lg cross-btn"
+             viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+        </svg>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#feedback">Feedback</a>
+        <a href="/register" class="lr">Register</a>
+        <a href="/login" class="lr">Login</a>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-list-stars list-btn"
+         viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5"/>
+        <path d="M2.242 2.194a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.28.28 0 0 0-.094.3l.173.569c.078.256-.213.462-.423.3l-.417-.324a.27.27 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.28.28 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.27.27 0 0 0 .259-.194zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.28.28 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.27.27 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.28.28 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.27.27 0 0 0 .259-.194zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.28.28 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.27.27 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.28.28 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.27.27 0 0 0 .259-.194z"/>
+    </svg>
+</nav>
+<section id="home" class="hero-sec">
+    <img class="bg" src="{{ url_for('static', filename='images/hero.jpg') }}">
+    <a class="head-hero">Let's experience the convenience of online tailoring....</a>
+</section>
+<br>
+<section class="aft-hero">
+    <span class="aft-hero-head">Our Services</span>
+    <div class="services">
+        <div class="serv">
+            <img class="img-s" src="{{ url_for('static', filename='images/ms.png') }}">
+            <span>Live Body Measurements</span>
+        </div>
+        <div class="serv">
+            <img class="img-s" src="{{ url_for('static', filename='images/tailor.jpg') }}">
+            <span>Suggest Nearby Tailors</span>
+        </div>
+        <div class="serv">
+            <img class="img-s" src="{{ url_for('static', filename='images/delivery.jpg') }}">
+            <span>Clothes Pick-up and Delivery</span>
+        </div>
+        <div class="serv">
+            <img class="img-s" src="{{ url_for('static', filename='images/order.jpg') }}">
+            <span>Easily place Order</span>
+        </div>
+        <div class="serv">
+            <img class="img-s" src="{{ url_for('static', filename='images/payment.jpg') }}">
+            <span>Secure Payment method</span>
+        </div>
+    </div>
+</section>
+<br>
+<hr>
+<section id="about" class="about">
+    <span class="abt-head">About Us</span>
+    <div class="abt-body">
+        <div class="text">
+            <p>Mirror Me is the home of clients and Tailors. We are here to bridge the gap between Tailors
+                and their clients to create the perfect outfit for any special occasion. This platform will enable
+                clients to
+                find, & review Tailors within their vicinity.</p>
+            <p>This platform is for both tailors and their clients with different interfaces.</p>
+            <p>Clients can search and select nearby tailors for them. And there is no need to visit tailor physically
+                because
+                "Mirror Me" allow you to extract your live body measurements by using your device camera, also you can
+                save them for further use.</p>
+            <p>Tailors can see your measurements in your order details and design custom fit clothes for you. Your
+                clothes Pick-up and delivery is also managed by us.</p>
+        </div>
+        <div class="image">
+            <img src="{{ url_for('static', filename='images/abt.png') }}">
+        </div>
+    </div>
+</section>
+<br>
+<section class="banner">
+    <img class="banner-bg" src="{{ url_for('static', filename='images/banner.jpg') }}">
+    <a class="banner-head">Let's get Log in to start your personalized tailoring journey</a>
+    <a class="btn" href="/login">Login</a>
+</section>
+<br><br><br><br>
+<section id="feedback" class="feedback">
+    <span class="fed-head">Your <b>FEEDBACK</b> is valuable for us!</span>
+    <form id="form" action="post">
+        <div class="names">
+            <div>
+                <label for="f-name">First Name</label>
+                <input id="f-name" type="text" name="f-name">
+            </div>
+            <div>
+                <label for="l-name">Last Name</label>
+                <input id="l-name" type="text" name="l-name">
+            </div>
+        </div>
+        <div class="la-text">
+            <label for="email">Email Address</label>
+            <input id="email" type="email" name="email">
+        </div>
+        <div>
+            <label>Rate Our Services</label>
+            <div>
+                <input id="rate" type="radio" value="Excellent" name="Rate Our Services">
+                <label for="rate">Excellent</label>
+            </div>
+            <div>
+                <input id="rate2" type="radio" value="Good" name="Rate Our Services">
+                <label for="rate2">Good</label>
+            </div>
+            <div>
+                <input id="rate3" type="radio" value="Disappointing" name="Rate Our Services">
+                <label for="rate3">Disappointing</label>
+            </div>
+        </div>
+        <div class="la-text">
+            <label for="feedback-box">Feedback</label>
+            <textarea id="feedback-box" name="Feedback" rows="4" cols="50"></textarea>
+        </div>
+        <div class="la-text">
+            <label for="improve">How can we improve?</label>
+            <textarea id="improve" name="improvement" rows="4" cols="50"></textarea>
+        </div>
+        <div>
+            <label>Would you recommend us to your friends?</label>
+            <br>
+            <input id="yes" type="radio" value="Yes" name="recommend">
+            <label for="yes">Yes</label>
+            <br>
+            <input id="no" type="radio" value="No" name="recommend">
+            <label for="no">No</label>
+        </div>
+        <div class="la-text">
+            <label for="addition">Any thing else you would like to add?</label>
+            <textarea id="addition" name="addition" rows="4" cols="50"></textarea>
+        </div>
+        <div id="message" ></div>
+        <input type="submit" value="Submit">
+    </form>
+</section>
+<footer>
+    <img class="foot-logo" src="{{ url_for('static', filename='images/mirror me.png') }}" width="170px">
+    <span>&copy; 2024, Mirror Me, All Rights Reserved.</span>
+</footer>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const bar = document.querySelector('.list-btn');
+        const close = document.querySelector('.cross-btn');
+        const nav = document.querySelector('.nav-links');
+
+        /* ipad screen navbar open event*/
+        if (bar) {
+            bar.addEventListener('click', () => {
+                nav.classList.add('active');
+            });
+        }
+
+        /* ipad screen navbar close event*/
+        if (close) {
+            close.addEventListener('click', () => {
+                nav.classList.remove('active');
+            });
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+{% extends "user_base.html" %}
+
+{% block style %}
+<style>
+.m-head{
+ text-align:center;
+ color:white;
+}
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    background-size: cover;
+    filter: brightness(45%);
+}
+.ms-o{
+    display: flex;
+    flex-direction: column;
+    margin-top:30px;
+    width:400px;
+}
+.row-out{
+  display: flex;
+  flex-direction: row;
+  gap:5%;
+}
+.ms{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom:50px;
+    width:40%;
+}
+.ms-table {
+            width: 100%;
+            width:400px;
+            margin: auto 20px auto;
+            border-collapse: collapse;
+}
+.ms-table th, .ms-table td {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+             text-align:center;
+}
+.ms-table th {
+            background: linear-gradient(to bottom right, #ffc0cb, #ffec8b);
+            background-color: #ecd290;
+            font-weight: bold;
+}
+.ms-table tr {
+            background-color: #FFF8DC;
+}
+.ms-table tr:hover {
+            background-color: #f1f1f1;
+}
+.flash-msg{
+    font-family: "Exo 2", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: italic;
+    padding-top:20px;
+}
+.ins{
+    font-family: "Exo 2", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: italic;
+    font-size:17px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    width:80%;
+    color:white;
+}
+.ins-sec{
+    display: flex;
+    flex-direction: column;
+}
+.link-m{
+  text-align:center;
+  padding-top:20px;
+  color:white;
+}
+@media (max-width: 945px) {
+  .row-out{
+    display: flex;
+    flex-direction: column;
+    gap:5%;
+  }
+  .ms-table {
+       width: 90%;
+       width:350px;
+       margin: auto auto auto 20px;
+   }
+
+}
+</style>
+{% endblock style %}
+
+
+{% block content %}
+<img class="bg" src="{{ url_for('static', filename='images/contBack.jpg') }}">
+<section class="row-out">
+    <section>
+        <h1 class="m-head">To be followed !</h1>
+        <section class="ins-sec">
+            <ol class="ins">
+                <li>Wear skin-tight clothing before standing in front of the camera.</li>
+                <li>Turn on the camera and stand facing it at a distance that allows your full body to be visible. If
+                    your
+                    full
+                    body is not visible, the measurements cannot be taken.
+                </li>
+                <li>Background and clothes color should be different.</li>
+                <li>Stand in a well-lit area for better results.</li>
+                <li>The camera will capture your live image to extract measurements. Your image will be deleted
+                    immediately
+                    after
+                    processing.
+                </li>
+                <li>Once the measurements are extracted, then they are automatically saved to your profile and can be used
+                    when you are placing an order.
+                </li>
+                <li>If you want to place an order then you have to extract your body measurements first. your latest
+                    measurements will be used in order placement.
+                </li>
+            </ol>
+            <br><br>
+            <div class="link-m">
+                Now, click <a href="{{ url_for('user.measure') }}"><b>here</b></a> for taking measurements.
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for msg in messages %}
+                <div class="flash-msg">
+                    <span class="font" style="color: #7FFF00; font-size: 16px; ">{{ msg }}</span>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+        </section>
+    </section>
+    <section class="ms-o">
+        <section class="ms">
+            <table class="ms-table">
+                <tr>
+                    <th>Measurements</th>
+                    <th>Values</th>
+                </tr>
+                <tr>
+                    <td>Shoulder Width</td>
+                    <td>{{ measurements.shoulder or '-' }}</td>
+                </tr>
+                <tr>
+                    <td>Sleeve Length</td>
+                    <td>{{ measurements.sleeves or '-' }}</td>
+                </tr>
+                <tr>
+                    <td>Armhole Depth</td>
+                    <td>{{ measurements.armhole or '-' }}</td>
+                </tr>
+                <tr>
+                    <td>Hips to Ankle</td>
+                    <td>{{ measurements.hip_to_ankle or '-' }}</td>
+                </tr>
+                <tr>
+                    <td>Back Length</td>
+                    <td>{{ measurements.back_l or '-' }}</td>
+                </tr>
+                <tr>
+                    <td>Waist</td>
+                    <td>{{ measurements.waist or '-' }}</td>
+                </tr>
+                <tr>
+                    <td>Chest/Bust</td>
+                    <td>{{ measurements.chest or '-' }}</td>
+                </tr>
+                <tr>
+                    <td>Knees</td>
+                    <td>{{ measurements.knees or '-' }}</td>
+                </tr>
+                <tr>
+                    <td>Front Length</td>
+                    <td>{{ measurements.front_l or '-' }}</td>
+                </tr>
+                <tr>
+                    <td>Date & Time</td>
+                    <td>{{ measurements.timestamp or '-' }}</td>
+                </tr>
+            </table>
+        </section>
+    </section>
+</section>
+
+
+{% endblock content %}
+
+
+{% block script %}
+<script>
+   $(".measure").addClass("active")
+</script>
+{% endblock script %}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,300;1,200&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='images/mirror me.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_tailor_base.css') }}">
+    {% block style %}{% endblock style %}
+    <title>{{tittle}} | Mirror Me</title>
+</head>
+<body>
+<nav>
+    <div class="nav-logo">
+        <img src="{{ url_for('static', filename='images/mirror me.png') }}" width="170px">
+    </div>
+    <div class="nav-links">
+        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-x-lg cross-btn"
+             viewBox="0 0 16 16">
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+        </svg>
+        <a href="/courier/NewOrders" class="new-o">New Orders</a>
+        <a href="/courier/updateOrderProgress" class="u-p">Update Progress</a>
+        <a href="/logout">Logout</a>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-list-stars list-btn"
+         viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5"/>
+        <path d="M2.242 2.194a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.28.28 0 0 0-.094.3l.173.569c.078.256-.213.462-.423.3l-.417-.324a.27.27 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.28.28 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.27.27 0 0 0 .259-.194zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.28.28 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.27.27 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.28.28 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.27.27 0 0 0 .259-.194zm0 4a.27.27 0 0 1 .516 0l.162.53c.035.115.14.194.258.194h.551c.259 0 .37.333.164.493l-.468.363a.28.28 0 0 0-.094.3l.173.569c.078.255-.213.462-.423.3l-.417-.324a.27.27 0 0 0-.328 0l-.417.323c-.21.163-.5-.043-.423-.299l.173-.57a.28.28 0 0 0-.094-.299l-.468-.363c-.206-.16-.095-.493.164-.493h.55a.27.27 0 0 0 .259-.194z"/>
+    </svg>
+</nav>
+<section class="content">
+    {% block content %}{% endblock content %}
+</section>
+<br><br>
+<footer>
+    <img class="foot-logo" src="{{ url_for('static', filename='images/mirror me.png') }}" width="170px">
+    <span>&copy; 2024, Mirror Me, All Rights Reserved.</span>
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-3.4.1.js"></script>
+{% block script %}{% endblock script %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const bar = document.querySelector('.list-btn');
+        const close = document.querySelector('.cross-btn');
+        const nav = document.querySelector('.nav-links');
+
+        /* ipad screen navbar open event*/
+        if (bar) {
+            bar.addEventListener('click', () => {
+                nav.classList.add('active');
+            });
+        }
+
+        /* ipad screen navbar close event*/
+        if (close) {
+            close.addEventListener('click', () => {
+                nav.classList.remove('active');
+            });
+        }
+    });
+</script>
+</body>
+</html>

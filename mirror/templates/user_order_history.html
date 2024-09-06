@@ -1,0 +1,121 @@
+{% extends "user_base.html" %}
+
+{% block style %}
+<style>
+.o-head{
+ text-align:center;
+ color:white;
+}
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+    filter: brightness(45%);
+}
+.order-table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.order-table th, .order-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.order-table th {
+    background: linear-gradient(to bottom right, #ffc0cb, #ffec8b);
+    color: #333;
+}
+
+.order-table tr {
+    background-color: #FFF8DC;
+}
+
+.order-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.order-table img {
+    display: block;
+    margin: 0 auto;
+}
+.font{
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: italic;
+}
+.cards-o{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:30px;
+}
+.status{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+</style>
+{% endblock style %}
+
+
+{% block content %}
+<img class="bg" src="{{ url_for('static', filename='images/contBack.jpg') }}">
+<h1 class="o-head">My Order's History !</h1>
+<section class="cards-o font">
+    {% if orders %}
+    <table class="order-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Tracking ID</th>
+            <th>Tailor ID</th>
+            <th>Tailor Address</th>
+            <th>Tailor Phone Number</th>
+            <th>Style Specification</th>
+            <th>Style Specification Image</th>
+            <th>Sent Clothes Image</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ order.tracking_id }}</td>
+            <td>{{ order.tail_id }}</td>
+            <td>{{ order.tail_address }}</td>
+            <td>{{ order.tail_phoneNo }}</td>
+            <td>{{ order.s_specification }}</td>
+            <td>
+                {% if order.s_speci_image %}
+                <img src="{{ url_for('tailor.get_image', order_id=order.id, image_type='s_speci_image') }}"
+                     alt="Style specification Image" width="50">
+                {% endif %}
+            </td>
+            <td>
+                <img src="{{ url_for('tailor.get_image', order_id=order.id, image_type='sent_clo_image') }}"
+                     alt="Sent Clothes Image" width="50">
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No placed orders yet !</p>
+    {% endif %}
+</section>
+{% endblock content %}
+
+
+{% block script %}
+<script>
+   $(".o-history").addClass("active")
+</script>
+{% endblock script %}

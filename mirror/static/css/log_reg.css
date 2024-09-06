@@ -1,0 +1,78 @@
+.body{
+    margin-top: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+    font-family: "Exo 2", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: italic;
+    color:white;
+}
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    background-size: cover;
+    filter: brightness(45%);
+}
+h1,a{
+   font-family: Lucida Handwriting;
+}
+form{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+form .name, .email, .pass{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+form .password{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+form input{
+  height:25px;
+  outline:none;
+  padding: 7px;
+  border:none;
+  border-radius:10px;
+}
+form .radio{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+form .rad-btn{
+  display:flex;
+  gap:8px;
+}
+.pass span{
+  color: gray;
+  font-size:11px;
+  width:300px;
+}
+form input[type=submit]{
+  background-color:#ecd290;
+  border:none;
+  border-radius:15px;
+  height:40px;
+  font-weight:bold;
+  font-size: 17px;
+  padding:10px;
+  background: linear-gradient(to bottom right, #ffc0cb, #ffec8b);
+}
+form input[type=submit]:hover{
+  box-shadow:0 0 10px black;
+}
+

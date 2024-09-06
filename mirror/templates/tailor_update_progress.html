@@ -1,0 +1,145 @@
+{% extends "tailor_base.html" %}
+
+{% block style %}
+<style>
+.o-head{
+  text-align:center;
+  color:white;
+}
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    background-size: cover;
+    filter: brightness(45%);
+}
+.forms{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:50px;
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: italic;
+  font-size:17px;
+}
+form{
+  padding:20px;
+  border-radius:20px;
+  box-shadow: 0 0 10px black;
+  background-color:#FFF8DC;
+  width:55%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+}
+.payment, .id-order{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+}
+form input[type=text]{
+  height: 35px;
+  outline: none;
+  width:400px;
+}
+form input[type=submit] {
+    background: linear-gradient(to bottom right, #ffc0cb, #ffec8b);
+    border: none;
+    border-radius: 15px;
+    height: 40px;
+    width: 150px;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 10px;
+    align-self:center;
+}
+form input[type=submit]:hover {
+    box-shadow: 0 0 10px black;
+}
+.check{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+@media (max-width: 750px) {
+  form input[type=text]{
+     width: 200px;
+  }
+  .check{
+    gap:20px;
+    flex-direction:column;
+  }
+}
+</style>
+{% endblock style %}
+
+
+{% block content %}
+<h1 class="o-head">Update Order Progress</h1>
+<br>
+<img class="bg" src="{{ url_for('static', filename='images/contBack.jpg') }}">
+<section class="forms">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for msg in messages %}
+    <div class="flash-msg">
+        {% if msg == "Order status updated successfully !" %}
+        <span class="font" style="color: #7FFF00; font-size: 16px; ">{{ msg }}</span>
+        {% else %}
+        <span class="font" style="color: red; font-size: 16px; ">{{ msg }}</span>
+        {% endif %}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('tailor.progress') }}" method="post">
+        <div class="id-order">
+            <label for="o-id">Enter Order ID: </label>
+            <input id="o-id" type="text" name="order-id" value="{{ order_id or '' }}" required>
+        </div>
+        <input type="submit" value="OK">
+    </form>
+    {% if order_id %}
+    <form action="{{ url_for('tailor.progress') }}" method="post">
+        <input type="hidden" name="order-id" value="{{ order_id or '' }}">
+
+        <div class="check">
+            <label for="sti_pro">Stitching in Process: </label>
+            <input id="sti_pro" type="checkbox" name="sti_pro">
+        </div>
+        <div class="check">
+            <label for="sti_do">Stitching Done: </label>
+            <input id="sti_do" type="checkbox" name="sti_done">
+        </div>
+        <div class="payment">
+            <label for="pay">Total Payment: </label>
+            <input id="pay" type="text" name="payment">
+        </div>
+        <div class="check">
+            <label for="clo_del_cor">Clothes Delivered to Courier: </label>
+            <input id="clo_del_cor" type="checkbox" name="clo_del_to_cor">
+        </div>
+        <input type="submit" value="Update">
+    </form>
+    {% endif %}
+</section>
+{% endblock content %}
+
+
+{% block script %}
+<script>
+   $(".u_progress").addClass("active")
+</script>
+{% endblock script %}

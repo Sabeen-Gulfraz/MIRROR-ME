@@ -1,0 +1,203 @@
+{% extends "tailor_base.html" %}
+
+{% block style %}
+<style>
+.pro-head{
+  text-align:center;
+  color:white;
+}
+.n-pass{
+  color: gray;
+  font-size:11px;
+}
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1000px;
+    z-index: -1;
+    background-size: cover;
+    filter: brightness(45%);
+}
+.font{
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: italic;
+}
+.det-list{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  padding-left:70px;
+}
+.na-ad{
+  display:flex;
+  flex-direction:row;
+  gap:50px;
+}
+.ac-detail{
+  background-color:#FFF8DC;
+  border-radius:20px;
+  padding:20px;
+  width:60%;
+  margin:auto;
+  font-size:18px;
+}
+.ac-head{
+  margin:10px 0 30px 0px;
+  text-align:center;
+}
+form{
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+form input[type=password], input[type=text]{
+  height:25px;
+  outline:none;
+  padding:10px;
+}
+form .in_input{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+}
+form .p_city{
+  display:flex;
+  flex-direction:row;
+  gap: 10px;
+}
+form .p_city .width{
+  width:50%;
+}
+.p-form{
+  width:80%;
+}
+form input[type=submit]{
+     background-color: #ecd290;
+    border: none;
+    border-radius: 15px;
+    height: 40px;
+    width: 150px;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 10px;
+    align-self:center;
+    background: linear-gradient(to bottom right, #ffc0cb, #ffec8b);
+}
+form input[type=submit]:hover{
+  box-shadow:0 0 10px black;
+}
+<!--/* Media queries */-->
+@media (max-width: 945px) {
+   .na-ad{
+       flex-direction:column;
+       gap:10px;
+   }
+   .det-list{
+     padding-left:10%;
+   }
+}
+@media (max-width: 750px) {
+   .det-list{
+     padding-left:5%;
+   }
+   .ac-detail{
+    font-size:15px;
+   }
+   form input[type=submit]{
+     width: 130px;
+    font-size: 15px;
+    padding: 8px;
+   }
+   .p-form{
+      width:90%;
+   }
+   form input[type=password]{
+     height:20px;
+   }
+   .ac-detail{
+     padding:20px;
+     width:75%;
+     margin:auto;
+     font-size:15px;
+   }
+   form .p_city{
+     flex-direction:column;
+     gap: 10px;
+   }
+   form .p_city .width{
+     width:100%;
+   }
+}
+</style>
+{% endblock style %}
+
+
+{% block content %}
+<h1 class="pro-head">
+  Welcome, {{tailor.username.capitalize()}} !
+</h1>
+<img class="bg" src="{{ url_for('static', filename='images/contBack.jpg') }}">
+<section class="ac-detail font">
+    <h1 class="ac-head">Account details</h1>
+    <div class="det-list">
+        <div class="na-ad">
+            <span><b>Username</b> : {{tailor.username}}</span>
+            <span><b>Email Address</b> : {{tailor.email}} </span>
+        </div>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          {% for msg in messages %}
+          <div class="flash-msg">
+              {% if msg == "Password changed successfully!!" or msg == "Profile updated successfully!!" %}
+               <span class="font" style="color: green; font-size: 16px; ">{{ msg }}</span>
+              {% else %}
+              <span class="font" style="color: red; font-size: 16px; ">{{ msg }}</span>
+              {% endif %}
+          </div>
+          {% endfor %}
+          {% endif %}
+         {% endwith %}
+        <form class="p-form" action="{{ url_for('tailor.home') }}" method="post">
+            <div class="p_city">
+                <div class="in_input width">
+                    <label for="phone_no"><b>Phone Number :</b> </label>
+                    <input id="phone_no" type="text" name="phone_no" value="{{ tailor.phone_no if tailor else '' }}">
+                </div>
+                <div class="in_input width">
+                    <label for="city"><b>City :</b></label>
+                    <input id="city" type="text" name="city" value="{{ tailor.city if tailor else '' }}">
+                </div>
+            </div>
+            <div class="in_input">
+                <label for="address"><b>Address :</b></label>
+                <input id="address" type="text" name="address" value="{{ tailor.address if tailor else '' }}">
+            </div>
+            <div class="in_input">
+                <label for="clo_type"><b>Sewing Collection :</b></label>
+                <input id="clo_type" type="text" name="clothing_type" placeholder="1. example1, 2. example2, 3..." value="{{ tailor.clothing_type if tailor and tailor.clothing_type else '' }}">
+            </div>
+            <div class="in_input">
+                <label for="price"><b>Price :</b></label>
+                <input id="price" type="text" name="price" placeholder="1. price-range1(1000-2000), 2. price-range2, 3..." value="{{ tailor.price if tailor and tailor.price else '' }}">
+            </div>
+            <span><b>Change Password</b> (if not, leave them empty):</span>
+            <input type="password" name="current-pass" placeholder="Enter current password">
+            <span class="n-pass" >New password should contain combination of Special characters, numbers, upper/lower case letters</span>
+            <input type="password" name="new-pass" placeholder="New password at least 6 characters long">
+            <input type="submit" value="Save Changes">
+        </form>
+    </div>
+</section>
+{% endblock content %}
+
+
+{% block script %}
+<script>
+   $(".t_profile").addClass("active")
+</script>
+{% endblock script %}

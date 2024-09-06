@@ -1,0 +1,130 @@
+{% extends "user_base.html" %}
+
+{% block style %}
+<style>
+.font{
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: italic;
+}
+.s-head{
+  text-align:center;
+  font-weight: 600;
+   margin-bottom:40px;
+   color:white;
+}
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1200px;
+    z-index: -1;
+    background-size: cover;
+    filter: brightness(45%);
+}
+.list-group{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.card-title{
+  font-weight: 600;
+  text-align:center;
+  margin-top:0px;
+}
+.card{
+  background-color:#FFF8DC;;
+  margin:10px;
+  padding:20px;
+  width: 330px;
+  border-radius: 30px;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+button{
+    border: 1px solid black;
+    border-radius: 15px;
+    height: 40px;
+    width: 150px;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 10px;
+    background: linear-gradient(to bottom right, #ffc0cb, #ffec8b);
+}
+button:hover{
+   box-shadow:0 0 10px black;
+}
+.btn{
+   text-align:end;
+}
+.cards{
+  gap:20px;
+  width:100%;
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+@media (max-width: 750px) {
+  .s-head{
+    font-size:18px;
+   }
+   .card{
+    margin:10px;
+    padding:20px;
+    width: 260px;
+   }
+   button{
+    height: 35px;
+    width: 130px;
+    font-size: 15px;
+    padding: 8px;
+}
+}
+</style>
+{% endblock style %}
+
+
+{% block content %}
+<h1 class="s-head font">Search result for "{{tittle}}"<br>
+<img class="bg" src="{{ url_for('static', filename='images/contBack.jpg') }}">
+</h1>
+<section class="cards">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for msg in messages %}
+    <div class="flash-msg">
+        <span class="font" style="color: red; font-size: 16px; ">{{ msg }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+{% for tailor in tailors %}
+    <div class="card font">
+        <div class="card-des">
+            <h1 class="card-title">{{tailor.username}}</h1>
+            <div class="list-group">
+                <span class="list-group-item"> <b><u>Tailor ID</u></b> : {{tailor.id}}</span>
+                <span class="list-group-item"> <b><u>Phone Number</u></b> : {{tailor.phone_no}}</span>
+                <span class="list-group-item"> <b><u>Email Address</u></b>  : {{tailor.email}}</span>
+                <span class="list-group-item"> <b><u>City</u></b>  : {{tailor.city}}</span>
+                <span class="list-group-item"> <b><u>Address</u></b>  : {{tailor.address}}</span>
+                <span class="list-group-item"> <b><u>Sewing Collection</u></b>  : {{tailor.clothing_type}}</span>
+                <span class="list-group-item"> <b><u>Price List</u></b>  : {{tailor.price}}</span>
+            </div>
+        </div>
+        <a href="/user/placeOrder/{{tailor.id}}" class="btn"><button>Place Order</button></a>
+    </div>
+{% endfor %}
+</section>
+{% endblock content %}
+
+
+{% block script %}
+<script>
+   $(".search").css("border" , "2px solid black")
+</script>
+{% endblock script %}

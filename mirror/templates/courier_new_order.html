@@ -1,0 +1,125 @@
+{% extends "courier_base.html" %}
+
+{% block style %}
+<style>
+.o-head{
+   text-align:center;
+   color:white;
+}
+.font{
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  font-style: italic;
+}
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+    filter: brightness(45%);
+}
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background: linear-gradient(to bottom right, #ffc0cb, #ffec8b);
+    color: #333;
+}
+
+table tr {
+    background-color: #FFF8DC;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table img {
+    display: block;
+    margin: 0 auto;
+}
+.cards-o{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:30px;
+}
+</style>
+{% endblock style %}
+
+
+{% block content %}
+<h1 class="o-head">New orders</h1>
+<img class="bg" src="{{ url_for('static', filename='images/contBack.jpg') }}">
+<section class="cards-o font">
+    {% if orders_with_tailors %}
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Customer Phone Number</th>
+                <th>Customer Address</th>
+                <th>Tailor Name</th>
+                <th>Tailor Phone Number</th>
+                <th>Tailor Address</th>
+                <th>Clothes for Pick-up</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in orders_with_tailors %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ item.order.id }}</td>
+            <td>{{ item.order.cus_name }}</td>
+            <td>{{ item.order.cus_phone_no }}</td>
+            <td>{{ item.order.cus_address }}</td>
+            <td>{{ item.tailor.username }}</td>
+            <td>{{ item.tailor.phone_no }}</td>
+            <td>{{ item.tailor.address }}</td>
+            <td>
+                <img src="{{ url_for('tailor.get_image', order_id=item.order.id, image_type='sent_clo_image') }}"
+                     alt="Sent Clothes Image" width="50">
+            </td>
+            <td>
+                {% if item.order.sti_done %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="green"
+                     class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                </svg>
+                {% else %}
+                <span>Pending</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No new orders received yet!</p>
+    {% endif %}
+</section>
+
+{% endblock content %}
+
+
+{% block script %}
+<script>
+   $(".new-o").addClass("active")
+</script>
+{% endblock script %}
